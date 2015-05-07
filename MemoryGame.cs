@@ -6,28 +6,27 @@ using System;
   correctly.  The player earns one point for each button
 correctly pressed.*/
 
+/*We will have to move around parts of the program, as Main() will be used to init the GUI.
+So we move Main() to Game(), and merge Game() and Init().  We must also create Getters and Setters.
+*/
 
-public class Test
+
+public class MemoryGame
 {
-	public static void Main()
+	int iTEST = 100;
+	int[] cseq = new int[iTEST]; //the computer generated sequence
+	public Game()
 	{
-		/*for testing purposes, both cseq and hseq are set to a 
-max length of 100.  We generate up to level random numbers, compare the 
-sequences, and if they match, level++, wipe cseq and repeat.
+		/*for testing purposes, cseq is set to a max length of 100.  We generate up
+		to level random numbers, compare cseq to the user input, and if they match,
+		level++, wipe cseq and repeat.
 		*/
-		int iTEST = 100;
-		int[] cseq = new int[iTEST]; //the computer generated sequence
-		int[] hseq = new int[iTEST]; //the human generated sequence
-		int score, level;
+		int score = 0, level = 1;
 		Random rnd = new Random();
 
-		//init game.  Set score to zero, cseq to one.
-		Init(out score, out level, out cseq);
-
-		/*Once Init has run, we then begin the game.
-		  We gen a rand seq until we reach level numbers
+		/*We gen a rand seq until we reach level numbers
 		  of rands, then we output the sequence.*/
-		foreach(int i in level)
+		for(int i=0; i<level;i++)
 		{
 			cseq[i] = rnd.Next(0,4);
 		}
@@ -37,17 +36,13 @@ sequences, and if they match, level++, wipe cseq and repeat.
 		  /*Once it is output, we  get user input*/
 
 	}
-	public void Init(out int score, out int level, out int cseq)
+
+	public static void Main()
 	{
-		level = 0;
-		//set GUI clock to zero
-		score = 0;
-		//set GUI score = 0
-	//	sizeof
-		//set length of cseq to 1.
-		/*Ignored for the moment, see workaround in Main()*/
+		/*this is a cheap workaround until we can get to a GUI editor, such as VS2013*/
+		Game()
 	}
-	public void DisplaySequence(ref int cseq)
+	public void DisplaySequence(ref int[] cseq)
 	{
 		//Just toss out the sequence to see if rnd works
 		foreach(int i in cseq)
