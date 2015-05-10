@@ -12,18 +12,15 @@ namespace MemoryGame
     public partial class GameForm : Form
     {
         private Game mGame;
+
         public GameForm()
         {
             InitializeComponent();
-            gameButton gameButton1 = new gameButton();
-            gameButton gameButton2 = new gameButton();
-            gameButton gameButton3 = new gameButton();
-            gameButton gameButton4 = new gameButton();
 
-            gameButton1.Enabled = false;
-            gameButton2.Enabled = false;
-            gameButton3.Enabled = false;
-            gameButton4.Enabled = false;
+            gameButton5.Enabled = false;
+            gameButton6.Enabled = false;
+            gameButton7.Enabled = false;
+            gameButton8.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -94,43 +91,43 @@ namespace MemoryGame
                 switch(mGame.TheArray[mGame.Count])
                 {
                     case 0:
-                        this.gameButton1.clicked = true;
+                        this.gameButton5.Clicked = true;
                         break;
                     case 1:
-                        this.gameButton2.Clicked = true;
+                        this.gameButton6.Clicked = true;
                         break;
                     case 3:
-                        this.gameButton3.Clicked = true;
+                        this.gameButton7.Clicked = true;
                         break;
                     case 4:
-                        this.gameButton4.Clicked = true;
+                        this.gameButton8.Clicked = true;
                         break;
                     default:
                         break;
                 }
 
                 mGame.Count++;
-                this.turnOffTimer.Enabled = true;
+                //this.turnOffTimer.Enabled = true;
             }
 
             if(mGame.Count > mGame.Turn)
             {
                 mGame.Stop();
 
-                gameButton1.Enabled = true;
-                gameButton2.Enablel = true;
-                gameButton3.Enabled = true;
-                gameButton4.Enabled = true;
+                gameButton5.Enabled = true;
+                gameButton6.Enabled = true;
+                gameButton7.Enabled = true;
+                gameButton8.Enabled = true;
             }
         }
 
         private void turnOffTimer_Tick(object sender, EventArgs e)
         {
-            this.gameButton1.Clicked = false;
-            this.gameButton2.Clicked = false;
-            this.gameButton3.Clicked = false;
-            this.gameButton4.Clicked = false;
-            this.turnOffTimer.Enabled = false;
+            this.gameButton5.Clicked = false;
+            this.gameButton6.Clicked = false;
+            this.gameButton7.Clicked = false;
+            this.gameButton8.Clicked = false;
+           // this.turnOffTimer.Enabled = false;
         }
 
         private void gameButton_Click(object sender, EventArgs e)
@@ -143,15 +140,19 @@ namespace MemoryGame
                 switch(btn.Text)
                 {
                     case "gameButton1":
+                    case "gameButton5":
                         val = 0;
                         break;
                     case "gameButton2":
+                    case "gameButton6":
                         val = 1;
                         break;
                     case "gameButton3":
+                    case "gameBUtton7":
                         val = 2;
                         break;
                     case "gameButton4":
+                    case "gameButton8":
                         val = 3;
                         break;
                 }
@@ -163,20 +164,20 @@ namespace MemoryGame
                     {
                         mGame.Play = false;
                         mGame.Turn++;
-                        gameButton1.Enabled = false;
-                        gameButton2.Enabled = false;
-                        gameButton3.Enabled = false;
-                        gameButton4.Enabled = false;
+                        gameButton5.Enabled = false;
+                        gameButton6.Enabled = false;
+                        gameButton7.Enabled = false;
+                        gameButton8.Enabled = false;
                         mGame.Restart();
                     }
                 }
                 else
                 {
                     mGame.GameOver();
-                    gameButton1.Enabled = false;
-                    gameButton2.Enabled = false;
-                    gameButton3.Enabled = false;
-                    gameButton4.Enabled = false;
+                    gameButton5.Enabled = false;
+                    gameButton6.Enabled = false;
+                    gameButton7.Enabled = false;
+                    gameButton8.Enabled = false;
                     this.button1.Enabled = true;
                 }
             }
