@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MemoryGame
 {
-	public class Game
+	class Game
 	{
 		const int iTEST = 100;
 		int[] cseq = new int[iTEST]; //the computer generated sequence
@@ -71,7 +71,13 @@ namespace MemoryGame
 		  }
         public void GameOver()
         {
-            ;
+            mTimer.Enabled = false;
+            String messageString = String.Format("Game Over\n You Scored {0}", Turn);
+            MessageBox.Show(messageString, "MemoryGame");
+
+            mPlay = false;
+            turn = 0; //score
+            count = 0; //level?
         }
         public void Start()
         {
@@ -83,13 +89,13 @@ namespace MemoryGame
         public void Restart()
         {
             mTimer.Enabled = true;
-            mCount = 0;
+            Count = 0;
         }
         public void Stop()
         {
             mTimer.Enabled = false;
             mPlay = true;
-            mCount = 0;
+            Count = 0;
         }
 
         private Timer mTimer;

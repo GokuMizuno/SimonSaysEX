@@ -15,7 +15,15 @@ namespace MemoryGame
         public GameForm()
         {
             InitializeComponent();
-            GameButton1.Enabled = false;
+            gameButton gameButton1 = new gameButton();
+            gameButton gameButton2 = new gameButton();
+            gameButton gameButton3 = new gameButton();
+            gameButton gameButton4 = new gameButton();
+
+            gameButton1.Enabled = false;
+            gameButton2.Enabled = false;
+            gameButton3.Enabled = false;
+            gameButton4.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -25,7 +33,7 @@ namespace MemoryGame
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.button1.Text = "Start")
+            if (this.button1.Text == "Start")
             {
                 this.button1.Enabled = false;
 
@@ -35,7 +43,7 @@ namespace MemoryGame
             }
         }
 
-        private void GameForm_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             Point[] myArray =
             {
@@ -83,19 +91,19 @@ namespace MemoryGame
         {
             if(mGame.Score <= mGame.Level)
             {
-                switch(mGame.Array)
+                switch(mGame.TheArray[mGame.Count])
                 {
                     case 0:
-                        this.button1.Clicked = true;
+                        this.gameButton1.clicked = true;
                         break;
                     case 1:
-                        this.button2.Clicked = true;
+                        this.gameButton2.Clicked = true;
                         break;
                     case 3:
-                        this.button3.Clicked = true;
+                        this.gameButton3.Clicked = true;
                         break;
                     case 4:
-                        this.button4.Clicked = true;
+                        this.gameButton4.Clicked = true;
                         break;
                     default:
                         break;
@@ -117,5 +125,91 @@ namespace MemoryGame
         }
 
         private void turnOffTimer_Tick(object sender, EventArgs e)
+        {
+            this.gameButton1.Clicked = false;
+            this.gameButton2.Clicked = false;
+            this.gameButton3.Clicked = false;
+            this.gameButton4.Clicked = false;
+            this.turnOffTimer.Enabled = false;
+        }
+
+        private void gameButton_Click(object sender, EventArgs e)
+        {
+            if(mGame.Play == true)
+            {
+                Button btn = (Button)sender;
+                int val = 4;
+
+                switch(btn.Text)
+                {
+                    case "gameButton1":
+                        val = 0;
+                        break;
+                    case "gameButton2":
+                        val = 1;
+                        break;
+                    case "gameButton3":
+                        val = 2;
+                        break;
+                    case "gameButton4":
+                        val = 3;
+                        break;
+                }
+
+                if(val == mGame.TheArray[mGame.Count])
+                {
+                    if(mGame.Count < mGame.Turn)  { mGame.Count++; }
+                    else
+                    {
+                        mGame.Play = false;
+                        mGame.Turn++;
+                        gameButton1.Enabled = false;
+                        gameButton2.Enabled = false;
+                        gameButton3.Enabled = false;
+                        gameButton4.Enabled = false;
+                        mGame.Restart();
+                    }
+                }
+                else
+                {
+                    mGame.GameOver();
+                    gameButton1.Enabled = false;
+                    gameButton2.Enabled = false;
+                    gameButton3.Enabled = false;
+                    gameButton4.Enabled = false;
+                    this.button1.Enabled = true;
+                }
+            }
+        }
+
+        Point MouseCurrentPos, MouseNewPos, formPos, formNewPos;
+        bool mouseDown = false;
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                mouseDown = true;
+                MouseCurrentPos = Control.MousePosition;
+                formPos = Location;
+            }
+        }
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            if(mouseDown == true)
+            {
+                MouseNewPos = Control.MousePosition;
+                formNewPos.X = MouseNewPos.X - MouseCurrentPos.X;
+                formNewPos.Y = MouseNewPos.Y - MouseCurrentPos.Y;
+                MouseCurrentPos = MouseNewPos;
+            }
+        }
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                mouseDown = false;
+            }
+        }
     }
 }

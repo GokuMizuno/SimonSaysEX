@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -14,7 +14,7 @@ namespace MemoryGame
     {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new gameForm());
+      Application.Run(new GameForm());
     }
   }
 }

@@ -25,8 +25,8 @@ namespace MemoryGame
         private int _rotation = 0;
         public int Rotation
         {
-            get;
-            set;
+            get { return _rotation; }
+            set { _rotation = value; }
         }
 
         public gameButton()
@@ -34,9 +34,17 @@ namespace MemoryGame
             InitializeComponent();
         }
 
+        /*protected override void Dispose(bool disposing)
+        {
+            if(disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }*/
         private void InitializeComponent()
         {
-            throw new NotImplementedException();
+            Container components = new System.ComponentModel.Container();
         }
 
         protected override void OnPaint(PaintEventArgs pevent)
@@ -134,7 +142,7 @@ namespace MemoryGame
             if (_clicked == false)
             {
                 g.FillPath(linearBrush, path);
-                g.FillPath(pgbrush, innerpath);
+                g.FillPath(b, innerpath);
             }
             else
             {
